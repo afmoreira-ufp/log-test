@@ -1,0 +1,60 @@
+<configuration>
+    <property name="LOG_DIR" value="./logs" />
+
+    <!--
+    appenders para determinar o padrão das mensagens e qual o ficheiro destinatário do log
+     -->
+    <appender name="LOG_INFO" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/tests-info.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOG_DEBUG" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/tests-debug.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOG_ERROR" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/tests-error.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROOT_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/tests-root.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+    loggers para determinar qual Objeto/package escreverá para qual appender e em qual nível de logging
+    -->
+    <logger name="pt.edu.ufp.logtest.OtherObject" level="INFO" >
+        <appender-ref ref="LOG_INFO" />
+    </logger>
+
+    <logger name="pt.edu.ufp.logtest" level="ERROR" >
+        <appender-ref ref="LOG_ERROR" />
+    </logger>
+
+    <logger name="pt.edu.ufp.logtest.SomeObject" level="DEBUG" >
+        <appender-ref ref="LOG_DEBUG" />
+    </logger>
+
+    <!--
+    cria um log a partir da raiz do projeto (abrange todas as bibliotecas da aplicação)
+    -->
+    <root level="debug">
+        <appender-ref ref="ROOT_LOG" />
+    </root>
+</configuration>
